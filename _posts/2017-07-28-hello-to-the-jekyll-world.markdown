@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "jekyll을 사용한 첫 게시글"
-date:   2017-07-29 12:12:02 +0900
-categories: jekyll update
+date:   2017-07-28 12:12:02 +0900
+categories: blog
 ---
 
 마크다운을 이용하여 `예쁜` 블로그 포스팅을 할 수 있습니다.
