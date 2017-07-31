@@ -6,6 +6,9 @@ date:   2017-07-28 15:44:00 +0900
 categories: blog
 ---
 
+<div class="fb-like" data-href="https://fureweb-com.github.io/blog/2017/07/28/letsencrypt-with-nginx-on-ubuntu.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+<br>
+
 ## 환경  
 
 본 포스트는 다음과 같은 환경에서의 작동을 보장합니다.  
@@ -139,6 +142,8 @@ $ sudo crontab -e
 이제 Certbot을 통해 편하게, 내 도메인에 SSL을 적용해 보세요!
   
   
+<div class="fb-comments" data-href="https://fureweb-com.github.io{{page.url}}" data-width="100%" data-numposts="10"></div>
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -147,4 +152,3 @@ $ sudo crontab -e
   js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.10&appId=403216550080274";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-comments" data-href="https://fureweb-com.github.io{{page.url}}" data-width="100%" data-numposts="10"></div>
