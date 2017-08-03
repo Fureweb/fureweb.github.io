@@ -17,7 +17,7 @@ categories: blog
 Node.js 환경이 설정된 도커 컨테이너 및 구름에서 제공하는 서브도메인을 생성하여 해당 도메인으로 웹앱을 서비스 하는 아주 간단한 방법에 대해 짧게 동영상으로 만들어 보았습니다. 아래 동영상을 한번 확인 해 주세요.
 
 <div style="text-align: center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UQ5v6pKtND8" frameborder="0" allowfullscreen></iframe>
+<iframe height="315" src="https://www.youtube.com/embed/UQ5v6pKtND8" frameborder="0" allowfullscreen  style="width: 100%"></iframe>
 </div>
 
 
