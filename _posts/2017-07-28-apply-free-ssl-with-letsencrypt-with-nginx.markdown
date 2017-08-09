@@ -63,15 +63,15 @@ $ sudo apt-get install python-certbot-nginx
 
 설치한 Certbot을 이용해서 도메인에 대한 인증서를 발급을 받겠습니다. 아래 예제로 사용된 도메인을 자신이 보유한 도메인으로 변경해주세요.
 {% highlight bash %}
-# fureweb.com에 대한 SSL 인증서를 발급합니다.
+# fureweb.com에 대한 SSL 인증서만 발급합니다.
 # 2017/7 기준, 아직 와일드카드를 지원하지 않습니다.
-$ sudo certbot --nginx -d fureweb.com
+$ sudo certbot certonly --nginx -d fureweb.com
 {% endhighlight %}
 
 -d 옵션을 계속 나열하여 복수개의 도메인에 대한 SSL 인증서를 한 번에 발급받을 수도 있습니다.
 {% highlight bash %}
-# 동시에 여러개의 SSL 인증서를 발급합니다.
-$ sudo certbot --nginx -d fureweb.com -d sub1.fureweb.com -d sub2.fureweb.com
+# 동시에 여러개의 SSL 인증서만 발급합니다.
+$ sudo certbot certonly --nginx -d fureweb.com -d sub1.fureweb.com -d sub2.fureweb.com
 {% endhighlight %}
 
 발급받은 SSL 인증서는 다음의 경로에 저장됩니다.
