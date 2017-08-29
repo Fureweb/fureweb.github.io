@@ -4,6 +4,16 @@ title:  "jekyll을 사용한 첫 게시글"
 date:   2017-07-28 12:12:02 +0900
 categories: blog
 ---
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- fureweb-github -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6234418861743010"
+     data-ad-slot="8427857156"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 마크다운을 이용하여 `예쁜` 블로그 포스팅을 할 수 있습니다.
 
