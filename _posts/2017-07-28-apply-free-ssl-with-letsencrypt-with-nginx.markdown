@@ -5,6 +5,16 @@ slug: "letsencrypt-with-nginx-on-ubuntu"
 date:   2017-07-28 15:44:00 +0900
 categories: blog
 ---
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- fureweb-github -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6234418861743010"
+     data-ad-slot="8427857156"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <div class="fb-like" data-href="https://fureweb-com.github.io/blog/2017/07/28/letsencrypt-with-nginx-on-ubuntu.html" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 <br>
