@@ -5,6 +5,16 @@ slug: "after-code-spitz-73-01-1"
 date:   2017-11-03 02:44:00 +0900
 categories: blog
 ---
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- fureweb-github -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6234418861743010"
+     data-ad-slot="8427857156"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <div class="fb-like" data-href="https://fureweb-com.github.io{{page.url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 <br>
@@ -56,7 +66,7 @@ lint라는 단어는 원래 양모와 같은 섬유의 보푸라기와 같은 �
 
 Compile Time을 거쳐 파일이 생성되고, 이 파일을 메모리에 적재하기 위해 만들어진 프로그램을 통해 메모리에 올리고 나면 CPU를 비롯한 여러 컴퓨터 자원을 이용하여 프로그램을 실행하게 됩니다. 이렇게 프로그램이 실행되고 있는 시점을 Run Time이라고 부르며, 이때 검출되는 오류가 있다면 이것은 Rum Time Error로 표현할 수 있을 것입니다.
 
-위 과정을 거치는 동안에도 검출할 수 있는 오류가 있습니다. 그것은 정말 지옥과도 같은 오류인데요, 이를 Context Error로 표현한다고 합니다. 예를들어, 슈팅 게임을 하다가 3번째 스테이지의 보스를 만났을 때 폭탄을 두 번 사용하면 게임이 멈춘다거나, 월급날에 자동으로 입금하는 프로그램을 작성했는데 이 금액이 절반씩 들어온다거나 하는 것들을 의미합니다. (정말 끔찍하네요 ㄷㄷ)
+위 과정을 거치는 동안에도 검출할 수 없는 오류가 있습니다. 그것은 정말 지옥과도 같은 오류인데요, 이를 Context Error로 표현한다고 합니다. 예를들어, 슈팅 게임을 하다가 3번째 스테이지의 보스를 만났을 때 폭탄을 두 번 사용하면 게임이 멈춘다거나, 월급날에 자동으로 입금하는 프로그램을 작성했는데 이 금액이 절반씩 들어온다거나 하는 것들을 의미합니다. (정말 끔찍하네요 ㄷㄷ)
 
 <br>
 
