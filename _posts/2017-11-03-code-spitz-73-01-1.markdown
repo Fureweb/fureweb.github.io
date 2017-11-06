@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "코드스피츠73 1회차 후기"
+title:  "코드스피츠73 1회차 후기 #1"
 slug: "after-code-spitz-73-01-1"
 date:   2017-11-03 02:44:00 +0900
 categories: blog
