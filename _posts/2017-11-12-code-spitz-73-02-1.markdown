@@ -1,0 +1,394 @@
+---
+layout: post
+title:  "코드스피츠73 2회차 후기 - Label, Switch"
+slug: "after-code-spitz-73-01-1"
+date:   2017-11-12 01:27:00 +0900
+categories: blog
+---
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- fureweb-github -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6234418861743010"
+     data-ad-slot="8427857156"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="fb-like" data-href="https://fureweb-com.github.io{{page.url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+<br>
+
+# 들어가며
+오늘 2회차 강의에서 듣게된, 코드 흐름 제어를 위해 사용할 수 있는 Flow Control Statements 중 `Label`, `Break`, `Continue`에 대해 되짚어 보도록 하겠습니다.
+
+아래 자바스크립트 코드에서 사용될 log라는 이름의 함수는 원래 강의에서는 특정 div 내 DOM 객체에 innerHTML로 내부 태그를 외부에서 받은 값으로 업데이트해주는 형태로 된 함수였습니다. 그냥 콘솔 출력과 같은 결과를 내는 것으로 봐 주셔도 무방할 것 같습니다. 따로 함수를 선언하지 않고 사용하는 부분에 대해 의아하게 생각할 수 있을 것 같아 먼저 말씀 드리고 정리를 시작합니다.
+
+<br>
+
+# Flow Control Statements - Label, Break, Continue
+
+## Label Set
+Turbo C가 등장한 이후의 언어들에 많이 차용된 코드 흐름의 제어를 위해 사용하는 위 제어문들은 가장 기본적인 흐름 제어용 문으로 사용되고 있습니다.
+
+이전까지의 언어에서는 특정 위치로 점프를 시키는 문인 goto를 많이 사용했다고 합니다. 그러한 언어에서는 코드를 점프시키기 위해 다음과 같이 line number를 사용했습니다.
+
+```vb
+10 PRINT "Testing, "
+20 I = 1
+30 PRINT I; ","
+40 IF I >= 3 THEN 60
+50 GOTO 30
+60 END
+```
+
+요즘의 프로그램 소스에서는 라인 넘버가 크게 중요한 의미가 없기 때문에, 이를 조금 더 낫게 사용할 수 있도록 등장한 것이 Label인데요. Label은 goto 대신 label이 점프될 기준점이 되어준다는 점에서, 그리고 자기가 사용될 수 있는 유효한 범위를 벗어난 곳으로 점프될 수 없게 되어있다는 점이 다른 점입니다.
+
+위 3가지 제어용 문은 코드에서 다음과 같이 표현됩니다.
+
+label_identifier:
+break label;
+continue label;
+
+Label은 자바스크립트에서 사용할 수 있는 모든 식별자를 사용할 수 있습니다.(Any JavaScript identifier that is not a reserved word.)
+
+Label은 같은 '스코프' 내에서는 중복 선언할 수 없습니다. 만약 Label을 다음과 같이 중복 선언했을 때 어떤일이 일어날까요?
+
+```js
+ABC:{ /* 1번째 레이블 */
+   // some code here 
+   ABC:{ /* 2번째 레이블 */
+       //other code here
+   }
+}
+// 오류 발생
+```
+
+2번째 레이블이 선언된 부분을 자바스크립트 파서가 읽어오는 순간 파업을 선언하며 소스 파싱이 중지됩니다. 하지만 다음처럼 사용하면 정상적으로 동작합니다.
+
+```js
+ABC:{ /* 1번째 레이블 셋 생성 */
+    console.log('1번 레이블 #1');
+    console.log('1번 레이블 #2');
+    break ABC; // label scope 내에서 break만 사용한 경우 Syntax Error가 발생합니다. break는 Iteration Set에서만 익명으로 사용할 수 있습니다. (아래 추가 설명)
+    console.log('1번 레이블 #3');
+}
+// 결과
+// 1번 레이블 #1
+// 1번 레이블 #2
+
+ABC:{ /* 2번째 레이블 셋 생성 */
+    console.log('2번 레이블 #1');
+    break ABC;
+    console.log('2번 레이블 #2');
+    console.log('2번 레이블 #3');
+}
+// 결과
+// 2번 레이블 #1
+```
+
+위 처럼 레이블을 사용하게 된다는 것은 해당 **Label Set**을 선언한다는 의미입니다. 자바스크립트에서의 문은 엔진에 의해 순차적으로 파싱되면서 record라는 것으로 변환이 됩니다. 자바스크립트 엔진은 모든 문을 번역하여 객체화 시킬 때 이 문을 전부 쪼개서 record로 바꾼 뒤 이를 차례대로 실행하는 과정을 거치게 됩니다. 이처럼 분기를 일으키는, 흐름 제어에 관여하는 문들(점프를 유발하는 코드들)을 Completion Record라고 표현합니다.
+
+추측컨대 위 코드가 오류가 나지 않는 것을 보면, Completion Record로 파싱된 문들이 엔진에 의해 차례대로 실행되면서 소비 될 때, 각각의 Label Set들은 같은 함수 스코프 내에 중복된 이름으로 존재하더라도 서로 간섭하지 않고 각자 코드가 위치하는 상태에서의 흐름 제어를 알아서 수행하는 것으로 생각됩니다.
+
+위 label을 사용한 코드는 아무 오류 없이 결과 측에 작성한 것 처럼 모두 실행이 이루어집니다.
+
+하지만 아래와 같이 문법적 오류를 발생시키는 경우는 어떻게 될까요?
+
+```js
+ABC:{ /* 3번째 레이블 셋 생성 */
+    console.log('3번 레이블 #1');
+    console.log('3번 레이블 #2');
+    break; 
+    console.log('3번 레이블 #3');
+}
+console.log('ABC DONE');
+// 결과
+// 이 코드는 break; 쪽 코드에서 파싱 오류가 발생합니다.
+```
+
+Label Set 내에서의 break는 `break labelName;` 형태로만 사용할 수 있으며, 이름이 없는 `break`문인 undefined label break문은 사용할 수 없습니다. `continue`또는 `undefined label`은 `for(expression){statements}`에서 중문 block 내에서만 사용이 가능합니다.
+
+<br>
+
+## 접근 제어와 스코프, 자유변수와 클로저
+
+누구는 접근할 수 있고 누구는 접근할 수 없는 기준이 되는 '격벽'을 세워 보호한 것을 스코프라고 부릅니다. 자바스크립트에서의 스코프는 변수의 라이프사이클(lifecycle, 생명주기)를 의미합니다.
+
+변수를 생각해 보면, <u>함수의 인자</u>와 함수 안에서 선언되는 <u>지역변수</u>가 있을 것입니다. 그리고 <u>멤버변수</u>도 있을 것입니다. 이 중에서는 클래스의 인스턴스인 멤버변수가, 해당 인스턴스가 null 되기 전 까지는 계속 유지될 것이기 때문에 일반적으로 라이프사이클이 더 길 것입니다.
+
+또한 이 변수로부터 **자유변수**와 **클로저**에 대해 논할 수 있습니다.
+
+자유변수(Free variable)는 완전한 고유명사입니다. 이는 함수나 인스턴스 그 누구든 관계없이 자기 자신의 스코프 기준에서는 그가 존재하는지 알 수 있는 방법이 없는 변수를 의미합니다. 어떤 함수라도 인자와 지역변수만 가지고 있을텐데, 우리는 그 바깥에 존재하는 변수들에 아무렇지도 않게 접근하고, 또 그것을 활용하고 있습니다. 아래의 코드를 확인해 보겠습니다.
+
+```js
+let result = {};
+const makeResult = (...args) => {
+    result.arg = args;
+};
+makeResult(1, 2, 3, 4);
+console.log(result); //{arg: [1, 2, 3, 4]}
+```
+
+위 makeResult라는 함수에서 result라는 Object에 arg라는 property에 자기 자신이 받아온 인자를 모두 배열화 하여 할당하고 있는것을 알 수 있습니다. 하지만 잘 생각해 보면, makeResult라는 함수의 입장에서는 result가 무엇인지 알 수 있는 방법이 없습니다.
+
+이와 마찬가지로 어떤 클래스의 메서드나 멤버변수, 그리고 메서드의 함수인자나 그 내부에서 사용되는 지역변수 이외의 모든 변수를 메서드 입장에서 보았을 때 자유변수라고 표현할 수 있습니다. 저는 어떤 데이터가 담겨있는 곳이 자기 자신이 속한 스코프가 아닌 그보다 더 바깥 세계에 존재하는 것들을 의미하는 것으로 이해하게 된 것 같습니다.
+
+자유변수는 상당히 많습니다. 브라우저에서 이미 전역으로 존재하고 있는 수 많은 전역 객체들을 생각해 보면 그렇다는 생각이 들 것입니다. 하지만 그냥 가져다 쓸 수 있는게 있고, 사용할 수 없는 것들이 존재하는데요. 이러한 자유변수를 사용할 수 있는 공간을 클로저(Closure)라고 표현합니다.
+
+저는 머리가 그렇게 좋지 못해서 클로저의 개념을 이해하기 위해 엄청 고생했었는데요, 이번에 이렇게 강의해주신 것을 들으니 정말 더 확 와닿고 이해가 됐다고 표현할 수 있게 된 것 같습니다. 클로저란 과연 무엇일까요?
+
+자바스크립트에서 함수를 감싸고 있는 공간을, 다른 말로 자유변수를 담고있는 함수 공간을 의미하는 것이 바로 클로저입니다.
+
+```js
+let a = 1, b = 2;
+const sum = (a) => {
+    return (b) => {
+        console.log('a : ', a);
+        console.log('b : ', b);
+    };
+};
+
+const c = sum(a); // (b) => {자유변수 a와 지역변수 b에 모두 접근할 수 있는 클로저를 리턴합니다.}
+c(b); // 위에서 리턴받은 클로저를 할당한 c라는 함수에 b라는 변수를 넣어 호출하면, 
+// 위에 담겨있던 해당 시점에 알 수 있던 a라는 변수에 담겼던 데이터와 
+// 이번에 전달한 b라는 변수에 담긴 값인 2에 모두 접근할 수 있습니다.
+
+// 결과
+// a : 1
+// b : 2
+```
+
+자유변수라는 개념을 설명하기 위해 필요한 것이 클로저인 것 처럼, 이를 하나의 개념으로 잘못 설명하면 안된다는 것을 배웠습니다.
+
+또한 여기서 쉐도잉이라는 것을 설명을 할 수 있습니다. 이름이 같으면 자기 스코프에 속한 변수를 먼저 사용합니다. 만약 자기 스코프에 해당 변수가 존재하지 않는다면 차례대로 루트스코프까지 자유변수가 존재하는지 계속 확인하고 없으면 undefined를 내뱉게 됩니다. shadowed 된 외부에 존재하는 자유변수는 로컬변수에 비해 우선순위가 낮아집니다. 안쪽에서는 바깥쪽을 볼 수 없어, 바깥쪽에 존재하는 변수는 shadowed되었다고 표현할 수 있고, 쉐도잉이란 이렇게 바깥쪽에 있는 자유변수를 로컬변수에 가려지게끔 하는 것을 의미합니다.
+
+<br>
+
+## Iteration Set
+다시 돌아와서, Label Set이 아닌 Iteration Set에 대해 알아보겠습니다. 아래의 코드에서 사용된 중문 영역을 Iteration Set 이라고 합니다. 아래와 같은 for 영역의 Iteration Set 상황에서는 이름없는 `break`와 `continue`를 사용할 수 있습니다.
+
+```js
+for (const i of [1, 2, 3, 4]) {
+    if (i === 2) continue;
+    if (i === 3) break;
+    log(i);
+}
+// 결과
+// 1
+```
+
+위에서 **for** 문 안에서 사용된 `break`는 별도의 label을 가리키지 않고도 사용할 수 있습니다. 그리고 `continue` 키워드는 중문의 시작점 바로 다음부터 선언된 코드들을 조건에 맞게 다시 실행할 수 있게 되어있는, 매우 특별한 존재입니다. for문 안에서의 `continue`는 현대 언어에서 새로 발견 된 부분입니다. `break`처럼 익명으로 흉내낼 수 없으며, goto문 처럼 특정 라인으로 보낼 수는 있어도 블럭 영역의 시작점으로는 보낼 수 없기때문에 다른 어떤 곳에서도 흉내낼 수 없는 신기한 존재입니다.
+
+Loop와 관련된 부분은 세번째 강의를 통해 더 보충받은 뒤, 다음 번의 포스트와 함께 작성하도록 하겠습니다.
+
+<br>
+
+
+# Switch
+
+switch문은 다음과 같이 사용합니다.
+
+```js
+switch (expression) {
+  case value1:
+    //Statements executed when the result of expression matches value1
+    [break;]
+  case value2:
+    //Statements executed when the result of expression matches value2
+    [break;]
+  ...
+  case valueN:
+    //Statements executed when the result of expression matches valueN
+    [break;]
+  default:
+    //Statements executed when none of the values match the value of the expression
+    [break;]
+}
+```
+
+위 처럼, switch문은 중괄호가 나오고 value1: 과 같은 형태로 레이블처럼 생긴 녀석이 등장합니다. 매우 label처럼 생긴 것을 알 수 있습니다.
+
+switch 문에 등장하는 {} 이 영역은 중문이 아닙니다. 중문은 단문이 올 수 있는 위치에 올 수 있는 {block}을 의미합니다. 하지만 이 경우에는 그러한 문을 의미하지 않습니다. 이는특별히 switch case block이라고 불립니다.
+
+![Switch Statement](/assets/img/posts/JavascriptSwitchStatement.png)
+
+```js
+switch(3)
+    case 3: break;
+// 파싱 단계에서 오류가 발생합니다.
+
+switch(3) {
+    case 3: break;
+}
+// 정상적으로 파싱됩니다.
+```
+
+자바스크립트의 switch 문은 fall through의 흐름을 가지고 있습니다. label도 마찬가지로 흐름 제어 자체가 fall through 형태로 이뤄진다고 합니다. switch에서는 식이 일치하는 case로 커서를 내린 뒤 break를 만날때까지 모든 코드들을 쭉 실행시킵니다.
+
+```js
+a:
+switch(3) {
+    case 3: console.log(3);
+    case 4: console.log(4); break a; //break;만 써도 같은 결과
+    case 5: console.log(5);
+    case 6: console.log(6);
+}
+// 결과
+// 3
+// 4
+```
+
+위 표현이
+
+```js
+switch(3) {
+    case 3: console.log(3);
+    case 4: console.log(4); break;
+    case 5: console.log(5);
+    case 6: console.log(6);
+}
+// 결과
+// 3
+// 4
+```
+
+이처럼 되는 이유는, 기본적으로 switch가 익명 레이블을 하나 만들어 주기 때문이라고 합니다. 자바스크립트에서의 synthetic sugar라고 표현할 수 있는건지 잘 모르겠지만, 우리는 일반적으로 switch문 위에 레이블을 따로 사용하고 있지는 않을 것이기에 그렇게 볼 수도 있나 하는 생각이 들기도 했습니다.
+
+
+자바스크립트의 switch는 다른 언어들과 좀 다르게 작동된다고 합니다. 다른 언어들은 컴파일 타임에 switch map을 따로 생성한 뒤, 그 map에 일치하는 key에 담긴 내부 문들을 실행하고 빠져나오는데, 자바스크립트의 switch는 위에서 아래로 내려온다고 합니다.
+
+
+조건과(a) 값(b)이 모두 한정적일 때, switch 문을 이용하여 아래처럼 표현할 수 있습니다.
+```js
+let a = 3, b = 0;
+switch(a) {
+    case b++: log('a', b); break;
+    case b++: log('b', b); break;
+    case b++: log('c', b); break;
+    case b++: log('d', b); break;
+    default:
+}
+// 결과
+// d 4
+```
+
+만약 조건만 한정적이고 값이 다양한 경우에는, 아래와 같이 표현할 수 있습니다.
+```js
+let a = 3, b = 0;
+switch(true) {
+    case a > 5: log('a', a); break;
+    case a > 4: log('b', a); break;
+    case a > 3: log('c', a); break;
+    case a > 2: log('d', a); break;
+    default:
+}
+// 결과
+// d 3
+```
+
+일반적으로 switch - case를 쓰게될 때에는 순서 관계가 생기게 됩니다. 위와 같이 기술한 경우, 제일 위에 큰 값을 기술해야합니다. fall through는 독립적인 로직을 기술할 때에는 괜찮지만, `a > 5 && a < 10`과 같은 형태로 표현해야한다면, 어떤 케이스를 제외했는지 직관적으로 알기가 매우 어렵습니다. switch를 식으로 전개할 때 단항식이면 괜찮지만, 저렇게 다항식으로 표현된다면 진리표를 만들기 전 까지는 저런 형태로 쓰지 않는 것이 좋다고 합니다. 말 그대로 그냥 봐서 이해하기 어렵고 복잡하기 때문일 것입니다.
+
+<br>
+
+# Conditional Statement
+
+번역된 말로 조건문 또는 판단문이라고 얘기하지만, 조건문에 조금 더 가깝다고 합니다. `if(truthy)` 이 자체가 성립하는지에 대한 문제이기 때문에, 식 위치에 평가된 결과가 truthy한지 아닌지에 따라 갈 수 있고 없고가 결정되기 때문에, 조건문으로 표현하는게 더 옳다는 말씀이 있었습니다.
+
+이전 강의에서 표현됐던 if의 optional한 사용과 mandatory한 사용에 대해 다시 한 번 짚어보겠습니다.
+
+```js
+if(expression) // optional
+if(expression) statement1 else statement2 // mandatory
+```
+
+else는 특별히 후방 결합이라는 것을 합니다. 이러한 특성 떄문에 알고리즘 문제가 대부분 여기서 발생합니다. else if의 구문은 후방 결합을 잘 이해해야만 사용하는것이 좋습니다.
+
+아래와 같은 코드는
+
+```js
+if(c === 1) {
+    // c가 1인 경우에
+} else if(c === 2) {
+    // c가 2인 경우에
+} else {
+    // c가 1 또는 2가 아닌 모든 경우에
+}
+```
+
+다음과 같이 쓰는것이 좋다고 합니다.
+
+```js
+if(c === 1) {
+    // c가 1인 경우에
+} else {
+    // 그렇지 않고 
+    if(c === 2) {
+        // c가 2인 경우에
+    } else {
+        // c가 1과 2가 아니었던 경우에
+    }
+}
+```
+
+이처럼 표현하면, 연산자 우선순위를 알지 않아도 괄호를 쳐 줌으로써 얻게되는 명확성을 얻을 수 있게 됩니다. 다른 제어문들은 문을 하나만 사용하는데 반해, if는 else를 소모하면서 후방결합이라는 것이 생기게 됩니다.
+
+그리고 또 하나 주의할 점으로, 병렬 조건인 경우에는 else if를 쓰지 않는 것이 좋습니다. else 다음에 작성된 로직이 그냥 잘못된 경우가 너무 많이 발견된다고 합니다. 1차 조건이 분기한 이후의 부분집합에 대해서만, 병렬이 아니고 부분집합에 대한 재 분기인 경우에만 쓰는 것이 좋다고 합니다.
+
+천상계 분들끼리는 이 코드를 왜 이렇게 썼는지 필요한 위치에 작성한 문법, 어떤 단어로 기술했는지를 보면 알 수 있다고 합니다. 저같은 사람들은 if도 되고 switch도 되는데, 왜 이럴때 if를 또는 switch를 쓴걸까 하고 의문을 가질 수 있지만, 천상계 분들은 모두 그 의도를 정확하게 보고 계시며, 그렇게 사용된 코드들은 서로 교환될 수 있는 맥락의 것이 아니라고 표현하신다고 합니다.
+
+다음과 같이 if와 else가 있고, 또 그 내부에 if를 사용했지만 else가 없는 경우가 있는 코드를 보겠습니다.
+
+```js
+if(c === 1) {
+
+} else {
+    if(c === 2) {
+
+    }
+}
+```
+
+위와 같은 경우 side effect가 발생합니다. if else는 mandatory한 것으로 절대로 빠져나갈 수 없는 길목을 의미합니다. 이러한 길목에서 생긴 분기 내에서는 왜 갑자기 optional한게 생긴다면, 이것은 코드가 뭐가 어떻게 됐다고 판단할 수가 없게됩니다. 그러니 위와 같은 코드는 반드시 아래처럼 짝으로 작성해야합니다.
+
+```js
+if(c === 1) {
+
+} else {
+    if(c === 2) {
+
+    } else {
+        // 1과 2가 아닌 경우 나머지 모두
+    }
+}
+```
+
+위처럼 반드시 mandatory함을 표현할 수 있어야만 합니다. 아니면 애초부터 else를 쓰지 말아야합니다.
+
+모든 코드들을 작성할 때에는 처음부터 격리구간을 잘 두고 정확한 의도를 잘 표현하면 됩니다. 갑자기 요구사항이 변경되어 코드가 바뀌게 되더라도 수정되는 범위는 딱 그만큼이 될 것입니다. 모든 얘기들이 전부 당연하지만, 코드의 결합도가 높아질수록 수정하기가 힘들게 됩니다.
+
+변하지 않는 것은 오직 변한다는 사실 뿐이다 라는 말이 있습니다. 프로그램도 마찬가지로 반드시 변한다는 것 만이 유일하게 변하지 않는 진리입니다. 처음 짠 그대로 절대로 유지되지 않을 것이기 때문에, 의도를 명확하게 드러내는 연습이 필요합니다.
+
+가장 기초가 되어주는 제어문 코드를 짤 때, 그 섬세함에 대해 어떻게 표현하는지가 굉장히 중요하다고 합니다. switch에서 병행조건을 기술하면 포함되지 않는 여집합 부분이 반드시 생기게 됩니다. 저는 잘 이해하지 못하고 있는 용어지만 -_-; 입실론이 관여하면 부동소수점이 등장하기 시작하고 그렇게 되면 사잇값이 나오기 마련이라고 합니다. 그리고 들어오는 값이 숫자만 들어온다는 보장도 없고.. 그런 이유로 switch 문에는 반드시 default가 있어야 합니다. 병행되는 조건에는 반드시 예외가 발생할 수 있는 가능성이 있기 때문입니다. 지금은 그렇지 않아도, 나중에 그렇게 수정이 되면 발생할 수 있는 일입니다. 이처럼 가능성이 있는 것들에 대해 미리 대비하는 연습을 해야하고, 왜 쓸데없이 코드를 이렇게 짰냐는 물음에 대해 제대로 대답할 수 있게 될 것입니다. 
+
+switch를 쓰면서 모든 케이스를 내가 다 커버할 수 있는게 확실한데, 쓸데없이 default를 써야만하나요? 네 쓰셔야 합니다. 자만하지 마세요 -_-
+
+if else switch 그리고 default, 이런 형태로 사용됐다면 무조건 필수적으로 이 제어문의 트랩에서 하나는 걸려서 나오게 됨을 '보장'받을 수 있습니다. 여기서 default가 빠져있다면? 그렇지 않을 수 있겠죠. 이처럼 반드시 흐름을 탔을 때 어디 하나 빈 틈이 없도록 생각하고 또 생각해야 한다는 것을 배우게 되었습니다.
+
+<br>
+
+# 마치며
+반복문에 대해서도 강의를 들었지만, 다음 강의에 더 보충이 될 것 같아서 이번 내용에 대해서는 다음에 함께 쓸 수 있도록 하겠습니다. 여전히 제대로 이해하지 못했거나 잘 모르면서 들은 내용들을 그냥 풀어 낸 것들도 있고, 잘못 표현했던 부분들이 분명히 있을거라는 생각을 합니다. 혹시라도 이런게 발견된다면 꼭 잘못된 부분을 바로잡을 수 있도록 말씀해 주셨으면 좋겠습니다!
+
+다른 분들께도 도움이 되는 글이었으면 좋겠습니다. 긴 글 읽어주셔서 감사합니다!
+
+<div class="fb-comments" data-href="https://fureweb-com.github.io{{page.url}}" data-width="100%" data-numposts="10"></div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.10&appId=403216550080274";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
