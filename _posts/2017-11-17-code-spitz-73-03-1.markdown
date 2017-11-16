@@ -1,0 +1,125 @@
+---
+layout: post
+title:  "코드스피츠73 3회차 후기 #1 - Iterable & Iterator Interface"
+slug: "after-code-spitz-73-03-1"
+date:   2017-11-17 02:39:00 +0900
+categories: blog
+---
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- fureweb-github -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6234418861743010"
+     data-ad-slot="8427857156"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="fb-like" data-href="https://fureweb-com.github.io{{page.url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+<br>
+
+# 들어가며
+오늘은 Iterator 그리고 Iterable Interface, 그리고 ES6에서의 반복 제어와 Generator에 대한 강의가 있었습니다. 시간관계상 이 둘을 반으로 쪼개어 Iterator/Iterable Interface에 대한 부분을 먼저 정리한 뒤 반복 제어 및 Generator에 대해 후속글로 작성하겠습니다.
+
+# Interface
+자바스크립트에서 사용되는 인터페이스란 사양에 맞는 값과 연결된 속성키의 셋트로, 자바스크립트의 Object는 어떤 인터페이스든 그 정의에 대해 구현할 수 있으며 동시에 여러개의 인터페이스를 만족할 수 있습니다.
+
+예를 들어 test 라는 인터페이스를 정의 해 보겠습니다. 이 인터페이스는 test라는 key에 함수가 있는데, 그 함수는 문자열인자를 하나 받으며 결과는 true를 항상 리턴한다고 정의하겠습니다. 인자를 받아서 무언가 생산적인 일은 하지는 않고 매우 엉성해 보이긴 하지만, 이런 규칙을 만족해야만 test 인터페이스의 요구사항을 충족했다고 표현할 수 있습니다. 자바스크립트 코드로는 다음과 같이 표현할 수 있을 것입니다.
+
+```js
+// 아래의 obj 객체는 test 인터페이스를 충실히 따르는 객체입니다.
+const obj = {
+    test: (str) => true
+};
+
+obj.test("whatever"); // true
+```
+
+제 생각에는 인터페이스란 특정한 존재로 불리우기 위해서 반드시 충족되어야만 하는 필수적 조건과 같은 개념입니다. 강아지가 동물계로 분류된 것은, 동물계 인터페이스에서 정의한 속성과 행동에 대해서 최소한 강아지는 모두를 충족시켰기 때문일 것입니다. 반면 강아지풀이 동물계로 분류되지 못하고 식물계로 분류된 것은, 동물계라면 당연히 가져야만하는 어떠한 속성이나 할 수 있는 어떤 행동들을 가지지 못했기 때문일 것입니다. 저는 이런 분류 체계를 잘 모르기때문에, 그냥 강아지와 강아지풀의 외적인 모습만 봐도 이것은 완전히 다른거야! 라고 얘기할 수 있지만, 실제로 그것들의 다름을 규정한 것은 이렇게 합의된 규칙이 있었기 때문이 아닐까요. 아무튼 각설하고 -_-;
+
+# Iterator Interface
+ES6에는 Iterator Interface라는 이름을 가진 인터페이스가 있습니다. 이 인터페이스는 다음의 조건을 모두 만족해야만 Iterator Interface라고 불릴 수 있고, 또한 ES6에서 마련해놓은 편리한 장치를 이용할 수 있는 혜택이 주어집니다. 그럼 이건 대체 어떤 형태여야 할까요?
+
+1. next라는 key를 가져야 하고
+2. 그 키에 연결된 인자를 받지 않는 함수가 있어야 하며, 해당 함수는 IteratorResultObject라는 것을 반환해야합니다.
+3. next 함수가 반환하는 IteratorResultObject는 done과 value라는 키를 가지고 있습니다.
+4. 이 중에서 done은 더 반복할 수 있을지 없을지에 따라 boolean 값을 반환합니다.
+
+자바스크립트 코드로는 다음과 같은 형태가 됩니다.
+```js
+const iteratorInterface = {
+    next: () => ({done: false, value:1})
+};
+
+console.log(iteratorInterface.next()); // {value:1, done: false}
+```
+
+위 코드로는 뭔가 생산적인것을 아무것도 할 수 없는 것 처럼 보이네요. 객체가 스스로 데이터를 가지고 있고, 그 데이터를 하나씩 꺼내서 있는 만큼만 차례대로 뒤에서부터 뽑아 오는 코드를 한번 보겠습니다.
+
+```js
+var iteratorInterface = {
+    data: [1,2,3,4],
+    next: function() {
+        return {
+            done: this.data.length === 0,
+            value: this.data.pop()
+        };
+    }
+};
+
+console.log(iteratorInterface.next()); // {done: false, value: 4}
+console.log(iteratorInterface.next()); // {done: false, value: 3}
+console.log(iteratorInterface.next()); // {done: false, value: 2}
+console.log(iteratorInterface.next()); // {done: false, value: 1}
+console.log(iteratorInterface.next()); // {done: true, value: undefined}
+```
+
+next함수를 호출할 때 마다 객체가 가지고있는 data 배열의 마지막 값을 하나 하나 꺼내서 호출한 쪽에 결과를 돌려주는 것을 알 수 있습니다. 뭔가 초콜렛 상자에 들어있는 초콜렛을 하나 하나 꺼내먹는 느낌이... -_-;
+
+즉 위와 같은 형태로, 자바스크립트 Object 내에 next라는 함수와 그 호출 결과로 done과 value를 가진 Object(IteratorResultObject)를 토해내는 형태를 가진 것을 Iterator Interface 라고 정해 둔 것임을 알 수 있었습니다. 이건 그냥 정한 것이니 이해하는것이 아니고 받아들이셔야합니다.
+
+# Iterable Interface
+다음으로 Iterable Inteface에 대해 확인해 보겠습니다. 이 인터페이스는 다음의 성질을 가지고 있습니다.
+1. Symbol.iterator(Well-known symbol)라는 키에
+2. 받아들이는 인자가 없으면서 Iterator Object를 반환시켜주는 함수가 옵니다.
+
+Iterator Object란, 위에서 설명하고있는 Iterator Interface를 만족하는 Object를 의미합니다. 즉, next라는 함수가 존재하면서 그것을 호출한 결과가 IteratorResultObject(done과 value라는 키를 가진 객체)를 반환하는 함수를 가진 객체를 의미하는것이죠. (말이 길어지니 괜히 쓸데없이 복잡해지는 느낌이 드네요.. -_-;)
+
+이 인터페이스는 자바스크립트 코드로 표현했을 때 다음과 같은 모양을 하고 있습니다.
+
+```js
+const iterableInterface = {
+    [Symbol.iterator]:function(){
+        return {
+            next:() => {
+                return {done: false, value: 1};
+            }
+        };
+    }
+};
+
+console.log(iterableInterface); //Symbol.iterator 라는 키에 함수가 담겨있습니다.
+console.log(iterableInterface[Symbol.iterator]()); // 키에담긴 함수를 호출하면.. next 키에 함수가 담긴 객체를 리턴(Iterator Object 입니다! 헷갈리지 마세요!)받게 됩니다.
+console.log(iterableInterface[Symbol.iterator]().next()); // next를 호출하면 {done: false, value: 1} 가 출력됩니다.
+```
+
+# 마치며
+여기까지 ES6에서의 반복 처리 시 매우 요긴하게 사용되면서 필수적으로 암기해야만하는 Iterable Interface와 Iterator Interface, 그리고 Iterator Interface가 구현해야하는 next 함수를 호출하면 얻게되는 IteratorResultObject에 대해서 알아보았습니다. 영문 표현에 비슷한 생김새를 가진 알파벳들이 자꾸 등장해서 더 헷갈려 보이기는 하지만, 그래도 반드시 익숙해져야만 하는 용어들이니 그냥 익숙해질 때 까지 보는 수 밖에 없다는 생각이 듭니다.
+
+이후 while문의 동작 방식과 Iterator Interface와의 비교, 그리고 Iterable/Iterator Interface를 구현한 객체들을 ES6에서는 얼마나 우아하게 쓸 수 있는지, 그리고 대망의 Generator에 대한 설명이 추가될 예정입니다.
+
+오늘 다 정리하고 자고 싶었는데, 다음주 화요일까지 보홀 여행을 가게 되어 부득이하게 여기까지만 정리하고 다녀와서 이어 정리할 수 있도록 하겠습니다!
+
+앞에서 슬라이드 넘기며 타이핑 하느라 강의 내용을 잘 받아 적지 못해 그 사이에 해주셨던 알찬 비유와 기막힌 설명들을 후기에 작성할 수 없던 점이 매우 아쉬웠습니다 ㅠㅠ 하지만 오늘도 많이 배울 수 있어 감사했습니다 :)
+
+<div class="fb-comments" data-href="https://fureweb-com.github.io{{page.url}}" data-width="100%" data-numposts="10"></div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.10&appId=403216550080274";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
