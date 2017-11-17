@@ -90,18 +90,16 @@ Iterator Object란, 위에서 설명하고있는 Iterator Interface를 만족하
 
 ```js
 const iterableInterface = {
-    [Symbol.iterator]:function(){
+    [Symbol.iterator](){
         return {
-            next:() => {
-                return {done: false, value: 1};
-            }
+            next:() => ({done: false, value: 1})
         };
     }
 };
 
 console.log(iterableInterface); //Symbol.iterator 라는 키에 함수가 담겨있습니다.
 console.log(iterableInterface[Symbol.iterator]()); // 키에담긴 함수를 호출하면.. next 키에 함수가 담긴 객체를 리턴(Iterator Object 입니다! 헷갈리지 마세요!)받게 됩니다.
-console.log(iterableInterface[Symbol.iterator]().next()); // next를 호출하면 {done: false, value: 1} 가 출력됩니다.
+console.log(iterableInterface[Symbol.iterator]().next()); // next를 호출하면 IteratorResultObject인 {done: false, value: 1} 가 출력됩니다.
 ```
 
 # 마치며
