@@ -19,6 +19,7 @@ permalink: /portpolio/
 - 메인 개발 언어 : Javascript  
 - 사용 기술/도구 : AngularJS, Sails.js, MariaDB, Nginx, Ubuntu
 - 참여 내역 : 고도화와 관련된 모델링/DB/프로토콜 설계 및 프로그램 구현 일체
+- 데모 영상 : (https://youtu.be/h0HdTTn7CRw){:target="_blank"}
 <br><br>
 
 
