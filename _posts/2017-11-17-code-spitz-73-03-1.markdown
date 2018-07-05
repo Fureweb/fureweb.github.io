@@ -2,7 +2,7 @@
 layout: post
 title:  "코드스피츠73 3회차 후기 #1 - Iterable & Iterator Interface"
 slug: "after-code-spitz-73-03-1"
-date:   2017-11-17 02:39:00 +0900
+date:   2017-11-17 12:39:00 +0900
 categories: blog
 ---
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

@@ -2,7 +2,7 @@
 layout: post
 title:  "코드스피츠73 1회차 후기 #2"
 slug: "after-code-spitz-73-01-2"
-date:   2017-11-07 01:50:00 +0900
+date:   2017-11-07 12:50:00 +0900
 categories: blog
 ---
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
