@@ -79,8 +79,8 @@ Compile Time을 거쳐 파일이 생성되고, 이 파일을 메모리에 적재
 | Language Code    | Lint Time    |
 | File             |              |
 | Load             |              |
-| Machine Language | Run Time     |
-| Run              |              |
+| Machine Language |              |
+| Run              | Run Time     |
 | Terminate        |              |
 ```
 
