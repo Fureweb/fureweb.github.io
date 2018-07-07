@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "2018년 5월 PWA 기술 리서치"
-slug: "after-code-spitz-73-03-2"
-date:   2018-05-10 12:39:00 +0900
+slug: "may-16-2018-pwa-technical-research"
+date:   2018-05-16 12:39:00 +0900
 categories: blog
 ---
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
