@@ -5,6 +5,15 @@ slug: "may-16-2018-pwa-technical-research"
 date:   2018-05-16 12:39:00 +0900
 categories: blog
 ---
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121955159-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121955159-1');
+</script>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- fureweb-github -->
 <ins class="adsbygoogle"

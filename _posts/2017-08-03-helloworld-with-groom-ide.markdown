@@ -4,6 +4,15 @@ title:  "구름IDE에서 컨테이너 생성 후 노드 웹앱 서비스하기"
 date:   2017-08-03 09:52:00 +0900
 categories: blog
 ---
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121955159-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121955159-1');
+</script>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- fureweb-github -->
 <ins class="adsbygoogle"

@@ -5,6 +5,15 @@ slug: "letsencrypt-with-nginx-on-ubuntu"
 date:   2017-07-28 15:44:00 +0900
 categories: blog
 ---
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121955159-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121955159-1');
+</script>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- fureweb-github -->
 <ins class="adsbygoogle"
