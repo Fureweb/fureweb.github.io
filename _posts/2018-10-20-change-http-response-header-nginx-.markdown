@@ -2,7 +2,7 @@
 layout: post
 title:  "Nginx의 응답헤더 중 Server 속성 변경하기"
 slug: "changing-server-properties-in-nginx's-response-header"
-date:   2018-05-16 12:39:00 +0900
+date:   2018-10-20 12:53:00 +0900
 categories: blog
 ---
 <!-- Global site tag (gtag.js) - Google Analytics -->
