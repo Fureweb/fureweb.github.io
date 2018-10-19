@@ -28,8 +28,8 @@ categories: blog
 <div class="fb-like" data-href="https://fureweb-com.github.io{{page.url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 <br>
 
-Nginx의 응답헤더 중 Server 속성 변경하기
-====
+![응답헤더의 Server 속성 변경](/assets/img/posts/20181020-nginx-response-header.png){:style="width:100%"}
+
 
 ### 개요
 Apache, Nginx 등의 여러가지 http 요청을 처리해주는 웹 서버는 응답시 헤더에 Server라는 속성으로 현재 어떤 서버가 응답하고 있는지 친절하게 알려줍니다. 하지만 이 응답은 보안에 문제가 있을 수 있습니다. 서버가 어떤 종류인지, X-Powered-By 등 웹 애플리케이션 WAS는 무엇인지 버전은 무엇인지를 친절하게 알려주는 경우가 있는데, 이는 취약점이 발견된 프레임워크를 이용했을 때 해커들의 먹잇감이 되기 좋을 수 있어 주의해야 할 필요가 있습니다.
