@@ -53,7 +53,7 @@ sudo apt-get install nginx-extras
 ```bash
 http {
   ...
-  more_set_headers: 'Server: my-webserver-name';
+  more_set_headers 'Server: my-webserver-name';
   ...
 }
 ```
