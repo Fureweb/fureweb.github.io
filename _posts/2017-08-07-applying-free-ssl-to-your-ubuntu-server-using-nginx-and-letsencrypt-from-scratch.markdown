@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "우분투에서 nginx 설치부터 무료 SSL 적용까지"
-slug: "applying-free-ssl-to-your-ubuntu-server-using-nginx-and-let\'sencrypt-from-scratch"
+slug: "applying-free-ssl-to-your-ubuntu-server-using-nginx-and-let'sencrypt-from-scratch"
 date:   2017-08-07 15:44:00 +0900
 categories: blog
 ---

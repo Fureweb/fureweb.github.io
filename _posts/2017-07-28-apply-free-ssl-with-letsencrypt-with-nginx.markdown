@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Ubuntu-Nginx 서버에서 Let\'sEncrypt를 이용한 무료 SSL 적용방법"
+title:  "Ubuntu-Nginx 서버에서 Let'sEncrypt를 이용한 무료 SSL 적용방법"
 slug: "letsencrypt-with-nginx-on-ubuntu"
 date:   2017-07-28 15:44:00 +0900
 categories: blog
