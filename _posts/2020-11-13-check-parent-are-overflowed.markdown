@@ -135,7 +135,7 @@ if (textElement.offsetWidth > textContainerElement.offsetWidth) {
 </dd>
 ```
 
-위와 같은 상황에서는, 각 option이 차지하는 너비에 따라 variable-options가 말줄임표 처리가 될 수도, 아닐 수도 있게 됩니다.
+위와 같은 상황에서는, 각 option이 차지하는 너비에 따라 flexible-options가 말줄임표 처리가 될 수도, 아닐 수도 있게 됩니다.
 
 결국 flexible-options 내에 children들이 존재하는 상태에서 children의 offsetWidth 값을 모두 더해 봐야만 말줄임표 처리가 되었는지 확인할 수 있습니다.
 
