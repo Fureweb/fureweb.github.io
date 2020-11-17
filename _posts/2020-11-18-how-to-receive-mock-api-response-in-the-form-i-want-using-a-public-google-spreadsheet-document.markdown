@@ -30,18 +30,15 @@ categories: blog
 <div class="fb-like" data-href="https://fureweb-com.github.io{{page.url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 <br>
 
+![api.fureweb.com](/assets/img/posts/20201118-api-fureweb-com.png){:style="width:100%"}
+
 안녕하세요. 이 전의 [브라우저에서 Google Sheets를 서버 없이 데이터베이스처럼 사용하기](https://fureweb-com.github.io/blog/2020/11/16/using-google-sheets-as-a-database-without-a-server-in-the-browser.html) 게시글을 작성하기 위해 만들었던 [Public Google Sheets Parser](https://www.npmjs.com/package/public-google-sheets-parser)라는 라이브러리를 이용한 무료 API를 만들어, 사용 방법을 공유하기위해 게시글을 작성하게 되었습니다.
 
 AWS Lightsail을 이용해 가장 저렴한 서버를 생성했고, 그곳에 [https://api.fureweb.com](https://api.fureweb.com) 서비스를 간단한 문서와 함께 배포 했습니다.
 
 구글 스프레드시트 문서를 하나 만든 뒤, 첫번째 행은 머리글, 두번째 행 부터는 데이터를 입력한 뒤 **반드시 공개 보기 설정**을 해 둔 상태에서 스프레드시트 ID만 가져와 사용하시면 편하게 사용하실 수 있을 것 같습니다.
 
-스프레드시트 ID가 무엇인지 잘 모르시겠다면, 아래의 표를 한번 확인 해 주세요. 경로에서 /d/와 /edit 사이에 있는 값이 스프레드시트 ID 입니다.
-
-|문서 경로|스프레드시트 ID|
-|---|---|
-|https://docs.google.com/spreadsheets/d/10WDbAPAY7Xl5DT36VuMheTPTTpqx9x0C5sDCnh4BGps/edit|10WDbAPAY7Xl5DT36VuMheTPTTpqx9x0C5sDCnh4BGps|
-|https://docs.google.com/spreadsheets/d/1oCgY0UHHRQ95snw7URFpOOL_DQcVG_wydlOoGiTof5E/edit|1oCgY0UHHRQ95snw7URFpOOL_DQcVG_wydlOoGiTof5E|
+스프레드시트 ID는 https://docs.google.com/spreadsheets/d/ 와 /edit 사이에 있는 값을 의미합니다.
 
 ### API 호출 예제
 
