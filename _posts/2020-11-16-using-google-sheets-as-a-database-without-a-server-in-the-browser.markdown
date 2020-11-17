@@ -5,6 +5,8 @@ slug: "using-google-sheets-as-a-database-without-a-server-in-the-browser"
 date:   2020-11-16 23:57:00 +0900
 categories: blog
 ---
+<style>li { word-break: break-all; }</style>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121955159-1"></script>
 <script>
