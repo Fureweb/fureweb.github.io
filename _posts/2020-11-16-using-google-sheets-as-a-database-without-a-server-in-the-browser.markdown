@@ -32,9 +32,9 @@ categories: blog
 
 아주 간단히 동적인 컨텐츠를 제공해야 하는 웹페이지 입장에서 데이터베이스 서버와 웹서버를 구축하여 API로 뽑아내 내려주거나, AWS Lambda같은 서버리스 기능을 사용하는것이 무겁고 어쩌면 사치라고 느껴지는 경우에 요긴할 것 같다고 생각합니다. 또는 프론트엔드 화면을 빨리 만들어야 할 때, 가짜 데이터를 만들기 위한 좋은 대안이 될 수 있지 않을까 생각합니다.
 
-[fetch API를 지원하지 않는 브라우저](https://caniuse.com/fetch)에서는 사용할 수 없다는 점, 문서가 누구나 읽을 수 있는 공개 상태여야한다는 점, 시트를 지정할 수 없이 맨 처음에 위치한 시트의 데이터만 가져올 수 있다는 점이 가장 큰 제약사항이기는 하지만, 간단히 쓰기 편해 보여서 공유할 생각을 하게 되었던 것 같아요.
+[fetch API를 지원하지 않는 브라우저](https://caniuse.com/fetch)에서는 사용할 수 없다는 점, 문서가 누구나 읽을 수 있는 공개 상태여야한다는 점, 시트를 지정할 수 없이 맨 처음에 위치한 시트의 데이터만 가져올 수 있다는 점이 가장 큰 제약사항이기는 합니다. 하지만 그만큼 API 키가 필요 없고, 간단히 쓰기 편한 것 같다고 느껴 공유할 생각을 하게 되었던 것 같아요.
 
-원래는 그냥 직접 호출해서 가공하는 방법을 풀어 써 보려다가 그냥 [글을 쓰기 위한 라이브러리](https://www.npmjs.com/package/public-google-sheets-parser)를 간단히 만들어 보았기에, 어떻게 사용했는지 설명 해 보겠습니다.
+원래는 그냥 직접 호출해서 가공하는 방법을 풀어 써 보려다가 이 글을 쓰기 위한 [Public Google Sheets Parser](https://www.npmjs.com/package/public-google-sheets-parser)라는 이름의 라이브러리를 간단히 만들어 보았기에, 이것을 어떻게 사용할 수 있는지 설명 해 보겠습니다.
 
 
 ### 데모 페이지 소개 및 사용 방법
@@ -58,9 +58,28 @@ Google Visualization API에서 내려주는 문자열을 직접 가공해서 필
 
 스프레드시트에 form으로 입력받은 내용을 리스트로 뿌려서 보여준다거나, 제목과 상세내용 그리고 이미지 경로 등을 머리글로 만들어 두고 데이터를 넣으면, 간단한 mock용 API로도 활용할 수 있지 않을까 생각합니다.
 
+### Node.js 지원 추가
+Node.js에서도 다음과 같이 사용할 수 있습니다.
+```js
+// public-google-sheets-parser 모듈 설치
+$ npm i public-google-sheets-parser
+
+// node.js를 통해 다음의 코드를 실행
+const PublicGoogleSheetsParser = require('public-google-sheets-parser')
+const spreadsheetId = '10WDbAPAY7Xl5DT36VuMheTPTTpqx9x0C5sDCnh4BGps'
+const parser = new PublicGoogleSheetsParser(spreadsheetId)
+parser.parse().then((items) => {
+  // items는 다음과 같습니다: [{ a: 1, b: 2, c: 3}, { a: 4, b: 5, c: 6 }, { a: 7, b: 8, c: 9 }]
+  console.log(items)
+})
+```
+
 ### 마무리
 보안에 크게 문제될 부분이 없는 데이터를 서비스하는 정적인 웹 사이트에서 사용하면 특히 괜찮은 방법이지 않을까 생각하고 있습니다.
-npm 모듈로 배포하는게 익숙하지 않아서, 예시도 그렇고 사용하는 방법에 대해 브라우저에서 소스코드를 직접 심어 사용하는 형태로밖에 설명을 못했지만 node 쪽에서도 사용할 수 있도록 업데이트 할 계획입니다. 쓰실 분이 있을지는 모르겠지만요.. ㅎㅎ
+
+아직 여러 플랫폼에서 지원하는 형태로 npm 모듈로 만들어 배포하는 방법을 잘 몰라서, CDN을 통한 브라우저에서의 사용과 node.js에서 require로 사용하는 부분밖에 지원하지 못하고 있는 상태입니다. 이 부분과 태스크 러너를 통해 배포용 파일을 만드는 부분을 공부해서 적용할 계획입니다.
+
+읽어주셔서 감사합니다!
 
 <div class="fb-comments" data-href="https://fureweb-com.github.io{{page.url}}" data-width="100%" data-numposts="10"></div>
 
