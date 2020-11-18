@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "How to receive mock api response in the form i want using a public google spreadsheet document"
-slug: "how-to-receive-mock-api-response-in-the-form-i-want-using-a-public-google-spreadsheet-document"
+title:  "How to receive mock api response in the form what I want using a public google spreadsheet document"
+slug: "how-to-receive-mock-api-response-in-the-form-what-i-want-using-a-public-google-spreadsheet-document"
 date:   2020-11-18 16:00:00 +0900
 categories: blog
 ---
@@ -31,6 +31,8 @@ categories: blog
 <br>
 
 ![api.fureweb.com](/assets/img/posts/20201118-api-fureweb-com.png){:style="width:100%"}
+
+>First of all, I ask for your understanding that it may not be smooth because it is written with the help of Google Translator because I'm not good at English.
 
 I created a free API using a library called [Public Google Sheets Parser](https://www.npmjs.com/package/public-google-sheets-parser) and wrote a post to share how to use it.
 
