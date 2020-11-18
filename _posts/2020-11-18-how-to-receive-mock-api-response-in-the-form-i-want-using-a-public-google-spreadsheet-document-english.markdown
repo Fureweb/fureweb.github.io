@@ -30,6 +30,8 @@ categories: blog
 <div class="fb-like" data-href="https://fureweb-com.github.io{{page.url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 <br>
 
+[한국어 게시글은 이 링크 클릭](https://fureweb-com.github.io/blog/2020/11/17/how-to-receive-mock-api-response-in-the-form-i-want-using-a-public-google-spreadsheet-document.html)
+
 ![api.fureweb.com](/assets/img/posts/20201118-api-fureweb-com.png){:style="width:100%"}
 
 >First of all, I ask for your understanding that it may not be smooth because it is written with the help of Google Translator because I'm not good at English.

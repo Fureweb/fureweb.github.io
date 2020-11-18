@@ -30,6 +30,8 @@ categories: blog
 <div class="fb-like" data-href="https://fureweb-com.github.io{{page.url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 <br>
 
+[English contents click here.](https://fureweb-com.github.io/blog/2020/11/17/how-to-receive-mock-api-response-in-the-form-i-want-using-a-public-google-spreadsheet-document.html)
+
 ![api.fureweb.com](/assets/img/posts/20201118-api-fureweb-com.png){:style="width:100%"}
 
 안녕하세요. 이 전의 [브라우저에서 Google Sheets를 서버 없이 데이터베이스처럼 사용하기](https://fureweb-com.github.io/blog/2020/11/16/using-google-sheets-as-a-database-without-a-server-in-the-browser.html) 게시글을 작성하기 위해 만들었던 [Public Google Sheets Parser](https://www.npmjs.com/package/public-google-sheets-parser)라는 라이브러리를 이용한 무료 API를 만들어, 사용 방법을 공유하기위해 게시글을 작성하게 되었습니다.
