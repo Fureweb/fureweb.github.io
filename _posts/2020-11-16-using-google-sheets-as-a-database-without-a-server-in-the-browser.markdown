@@ -30,6 +30,8 @@ categories: blog
 <div class="fb-like" data-href="https://fureweb-com.github.io{{page.url}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 <br>
 
+![소개 이미지](/assets/img/posts/20201116-introduction.png)
+
 서버 없이 브라우저를 통해 구글 시트의 데이터를 데이터베이스에 저장되어있는 데이터 처럼 활용할 수 있는 방법을 혹시 알고 계셨나요? 매우 간단한 방법이지만 많이 알지 못하고 계시는 것 같아서 공유 해 보려고 합니다.
 
 아주 간단히 동적인 컨텐츠를 제공해야 하는 웹페이지 입장에서 데이터베이스 서버와 웹서버를 구축하여 API로 뽑아내 내려주거나, AWS Lambda같은 서버리스 기능을 사용하는것이 무겁고 어쩌면 사치라고 느껴지는 경우에 요긴할 것 같다고 생각합니다. 또는 프론트엔드 화면을 빨리 만들어야 할 때, 가짜 데이터를 만들기 위한 좋은 대안이 될 수 있지 않을까 생각합니다.
