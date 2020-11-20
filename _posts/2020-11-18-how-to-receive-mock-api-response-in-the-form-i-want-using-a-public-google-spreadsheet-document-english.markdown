@@ -5,7 +5,7 @@ slug: "how-to-receive-mock-api-response-in-the-form-what-i-want-using-a-public-g
 date:   2020-11-18 16:00:00 +0900
 categories: blog
 ---
-<style>a, li { word-break: break-all; }</style>
+<style>a, li, code { word-break: break-all; }</style>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121955159-1"></script>
