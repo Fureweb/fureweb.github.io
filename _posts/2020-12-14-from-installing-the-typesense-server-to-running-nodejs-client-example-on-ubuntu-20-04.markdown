@@ -45,7 +45,7 @@ categories: blog
 
 <br />
 
-### Typesense 설치 및 Node.js v14.x 설치
+### Typesense 및 Node.js v14.x 설치
 
 #### Ubuntu용 pre-built 바이너리 다운로드
 
