@@ -36,6 +36,7 @@ categories: blog
 #### 필수
 - Ubuntu 20.04 운영체제
 - root 또는 sudo 명령을 사용할 수 있는 권한을 가진 사용자로 서버에 SSH 접속이 가능해야 함
+
 #### 선택
 - node.js v14.x 사전 설치 (현재 설치되어있지 않은 경우 아래 과정을 통해 설치 가능)
 
@@ -173,6 +174,7 @@ let searchParameters = {
 let searchResults = await client.collections('books').documents().search(searchParameters)
 
 // 결과는 다음과 같습니다.
+/**
 {
   facet_counts: [],
   found: 7, // 파이썬이라는 키워드가 들어간 책이 15권 중에 7권 이라니.. 엄청난 인기군요 ^^;
@@ -204,6 +206,7 @@ let searchResults = await client.collections('books').documents().search(searchP
   request_params: { per_page: 10, q: '파이썬' },
   search_time_ms: 0
 }
+*/
 ```
 - 편의상 hits의 첫 번째 아이템만 펼쳐 보았습니다. hit된 document는 원본 정보를, highlights에는 대상 필드에 일치된 키워드에 `mark`태그가 붙은 결과를 snippet 속성에 담아 내려줍니다.
 
@@ -221,6 +224,7 @@ searchParameters = {
 searchResults = await client.collections('books').documents().search(searchParameters)
 
 // 결과는 다음과 같습니다.
+/**
 {
   facet_counts: [],
   found: 1,
@@ -251,6 +255,7 @@ searchResults = await client.collections('books').documents().search(searchParam
   request_params: { per_page: 10, q: '파이썬' },
   search_time_ms: 0
 }
+*/
 ```
 
 ### 마치며
