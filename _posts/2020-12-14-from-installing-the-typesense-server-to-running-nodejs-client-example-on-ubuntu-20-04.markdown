@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "우분투 20.04에서 typesense 서버 설치부터 클라이언트 예제 실행까지"
-slug: "from-installing-the-typesense-server-to-running-the-client-example-on-ubuntu-20-04"
+title:  "우분투 20.04에서 typesense 서버 설치부터 node.js 클라이언트 예제 실행까지"
+slug: "from-installing-the-typesense-server-to-running-nodejs-client-example-on-ubuntu-20-04"
 date:   2020-12-14 00:30:00 +0900
 categories: blog
 ---
