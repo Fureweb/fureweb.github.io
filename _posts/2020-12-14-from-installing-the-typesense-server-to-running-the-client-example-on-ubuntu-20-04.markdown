@@ -132,7 +132,9 @@ const client = new Typesense.Client({
 ```
 
 #### books 컬렉션 생성 후 결과 확인
+
 - 컬렉션은 관계형 데이터베이스에서의 Table과 거의 같은 개념(roughly equivalent to a table in a relational database)입니다. 도큐먼트는 Table의 한 row를 의미한다고 생각하시면 될 것 같습니다.
+
 
 ```js
 const booksSchema = {
@@ -191,9 +193,10 @@ let searchParameters = {
 }
 
 let searchResults = await client.collections('books').documents().search(searchParameters)
+```
 
-// 결과는 다음과 같습니다.
-/**
+<pre>
+/** 결과는 다음과 같습니다.
 {
   facet_counts: [],
   found: 7, // 파이썬이라는 키워드가 들어간 책이 15권 중에 7권 이라니.. 엄청난 인기군요 ^^;
@@ -226,7 +229,8 @@ let searchResults = await client.collections('books').documents().search(searchP
   search_time_ms: 0
 }
 */
-```
+</pre>
+
 - 편의상 hits의 첫 번째 아이템만 펼쳐 보았습니다. hit된 document는 원본 정보를, highlights에는 대상 필드에 일치된 키워드에 `mark`태그가 붙은 결과를 snippet 속성에 담아 내려줍니다.
 
 
@@ -241,9 +245,10 @@ searchParameters = {
 }
 
 searchResults = await client.collections('books').documents().search(searchParameters)
+```
 
-// 결과는 다음과 같습니다.
-/**
+<pre>
+/** 결과는 다음과 같습니다.
 {
   facet_counts: [],
   found: 1,
@@ -275,7 +280,7 @@ searchResults = await client.collections('books').documents().search(searchParam
   search_time_ms: 0
 }
 */
-```
+</pre>
 
 ### 마치며
 [공식 가이드 문서](https://typesense.org/docs/0.17.0/guide/)에는 패싯 검색 등 다른 예제가 더 있지만, 제가 이 부분을 위한 데이터를 만들기가 귀찮(-_-;)아서 일단은 여기까지만 간단하게 사용 방법을 확인 해 보았습니다. 관심이 있으시다면 [해당 문서](https://typesense.org/docs/0.17.0/guide/)를 확인 해 보세요!
