@@ -38,17 +38,22 @@ categories: blog
 - root 또는 sudo 명령을 사용할 수 있는 권한을 가진 사용자로 서버에 SSH 접속이 가능해야 함
 
 #### 선택
-- node.js v14.x 사전 설치 (현재 설치되어있지 않은 경우 아래 과정을 통해 설치 가능)
+- node.js v14.x 사전 설치 (현재 설치되어있지 않은 경우 아래 과정을 통해 설치 
+가능)
+
+<br />
 
 ### Typesense 설치 및 Node.js v14.x 설치
 
 #### Ubuntu용 pre-built 바이너리 다운로드
+
 ```bash
 # 현재 기준 최신버전 0.17.0
 wget --trust-server-names https://dl.typesense.org/releases/0.17.0/typesense-server-0.17.0-amd64.deb
 ```
 
 #### 바이너리 설치
+
 ```bash
 # 설치 성공 후 자동으로 typesense-server가 실행됨
 sudo apt install ./typesense-server-0.17.0-amd64.deb
@@ -69,6 +74,7 @@ log-dir = /var/log/typesense
 ```
 
 #### 서버 실행상태 확인
+
 ```bash
 curl http://localhost:8108/health
 # 기대 응답> {"ok":true}
@@ -77,28 +83,36 @@ curl http://localhost:8108/health
 #### node.js v14.x 설치
 - **이미 설치되어 있는 경우 생략 가능**
 - [설치 참고 문서](https://github.com/nodesource/distributions/blob/master/README.md)
+
 ```bash
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
+<br/>
+
 ### Typesense client 설치
 
 #### 같은 서버의 ~/typesense-client 디렉토리에 실습을 위한 node.js용 패키지 설치
+
 ```bash
 mkdir ~/typesense-client
 cd ~/typesense-client
 npm install typesense @babel/runtime public-google-sheets-parser
 ```
 
+<br/>
+
 ### 예제 코드 실습
 #### node REPL 실행
 - node v14.x에서 await를 async 함수 본문이 아니어도 사용할 수 있도록 하는 `--experimental-repl-await` 옵션을 준 뒤 REPL을 실행합니다.
+
 ```bash
 node --experimental-repl-await
 ```
 
 #### 실습에 필요한 패키지 선언 및 클라이언트 객체 생성
+
 ```bash
 # 아래의 순서대로 쭉 작성 해 봅니다.(공식 문서에 나와있는 내용 거의 그대로 진행)
 # apiKey는 /etc/typesense/typesense-server.ini 파일에 입력된 내용을 미리 확인하여 준비 해 주세요.
@@ -119,6 +133,7 @@ const client = new Typesense.Client({
 
 #### books 컬렉션 생성 후 결과 확인
 - 컬렉션은 관계형 데이터베이스에서의 Table과 거의 같은 개념(roughly equivalent to a table in a relational database)입니다. 도큐먼트는 Table의 한 row를 의미한다고 생각하시면 될 것 같습니다.
+
 ```js
 const booksSchema = {
   name: 'books',
@@ -144,6 +159,7 @@ const afterCreateBooksSchema = await client.collections().create(booksSchema)
 #### books 컬렉션에 도서 등록
 - [public-google-sheets-parser](https://www.npmjs.com/package/public-google-sheets-parser)를 이용해 이미 만들어 둔 샘플 도서 정보를 받아서, books 컬렉션의 document로 등록합니다.
 - [16i6SZEmwZ_F1MO2pGNJeq7WLJ6bP0QJkXKA_vA0GTG8](https://docs.google.com/spreadsheets/d/16i6SZEmwZ_F1MO2pGNJeq7WLJ6bP0QJkXKA_vA0GTG8/edit#gid=0)
+
 ```js
 const booksSpreadsheetId = '16i6SZEmwZ_F1MO2pGNJeq7WLJ6bP0QJkXKA_vA0GTG8'
 const rawBooks = await parser.parse(booksSpreadsheetId)
@@ -160,9 +176,12 @@ const books = rawBooks.map((book) => {
 books.forEach((book) => client.collections('books').documents().create(book))
 ```
 
-#### books 검색
-##### 제목에 파이썬이 들어간 도서 찾기
+<br/>
+
+### books 검색
+#### 제목에 파이썬이 들어간 도서 찾기
 - q, query_by, sort_by 속성을 이용하여 document를 검색합니다. sort_by 속성의 콜론을 확인 해 보시면 내림차순 정렬을 간단하게 할 수 있음을 확인할 수 있습니다.
+
 ```js
 // 아래 실행할 코드에서 재활용하기 위해 let으로 선언합니다. (이하 마찬가지)
 let searchParameters = {
@@ -211,7 +230,7 @@ let searchResults = await client.collections('books').documents().search(searchP
 - 편의상 hits의 첫 번째 아이템만 펼쳐 보았습니다. hit된 document는 원본 정보를, highlights에는 대상 필드에 일치된 키워드에 `mark`태그가 붙은 결과를 snippet 속성에 담아 내려줍니다.
 
 
-##### 평점이 9.6 이상인 파이썬 도서만 검색하기
+#### 평점이 9.6 이상인 파이썬 도서만 검색하기
 - filter_by 조건을 통해 원하는 조건을 만족하는 도큐먼트만 추릴 수 있습니다.
 ```js
 searchParameters = {
