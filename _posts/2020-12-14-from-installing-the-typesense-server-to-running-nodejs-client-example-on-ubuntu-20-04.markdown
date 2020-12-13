@@ -32,6 +32,8 @@ categories: blog
 
 <!-- contents start -->
 
+![샘플 스프레드시트](/assets/img/posts/20201214-typesense-intro.png)
+
 ### 사전 준비
 #### 필수
 - Ubuntu 20.04 운영체제
