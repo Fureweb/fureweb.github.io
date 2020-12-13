@@ -236,6 +236,7 @@ let searchResults = await client.collections('books').documents().search(searchP
 
 #### 평점이 9.6 이상인 파이썬 도서만 검색하기
 - filter_by 조건을 통해 원하는 조건을 만족하는 도큐먼트만 추릴 수 있습니다.
+
 ```js
 searchParameters = {
   q: '파이썬',
