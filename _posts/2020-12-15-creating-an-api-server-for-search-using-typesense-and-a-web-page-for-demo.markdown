@@ -73,6 +73,7 @@ categories: blog
 <br/>
 
 ### 검색 키워드 입력 부터 응답을 받기까지의 주요 과정 설명
+
 |순서|처리주체|내용|
 |:--|:--|:--|
 |1| `웹페이지` | 웹 페이지의 input창에 focus된 상태에서 키보드가 keyup 될 때 마다 axios를 이용하여 검색 API 호출<br/>(debounce 없이, trim된 키워드가 truthy 하다면 API 서버에 검색 요청)<br/>[참고용 소스코드](view-source:https://api.fureweb.com/typesense.html)
