@@ -76,11 +76,11 @@ categories: blog
 
 |순서|처리주체|내용|
 |:--|:--|:--|
-|1| `웹페이지` | 웹 페이지의 input창에 focus된 상태에서 키보드가 keyup 될 때 마다 axios를 이용하여 검색 API 호출<br/>(debounce 없이, trim된 키워드가 truthy 하다면 API 서버에 검색 요청)<br/>[참고용 소스코드](view-source:https://api.fureweb.com/typesense.html)
-|2| `API서버` | 전달받은 키워드가 truthy한 경우, typesense 클라이언트를 이용해 검색 서버에 질의
-|3| `검색서버` | 질의 결과를 API 서버로 응답
-|4| `API서버` | 검색서버로부터 전달받은 응답을 highlight된 snippet만 내려주도록 가공하여 응답 처리
-|5| `웹페이지` | 웹 페이지에서 발생시킨 http 요청에 대한 응답을 vue.js를 이용하여 화면에 표현
+| 1 | `웹페이지` | 웹 페이지의 input창에 focus된 상태에서 키보드가 keyup 될 때 마다 axios를 이용하여 검색 API 호출<br/>(debounce 없이, trim된 키워드가 truthy 하다면 API 서버에 검색 요청)<br/>[참고용 소스코드](view-source:https://api.fureweb.com/typesense.html) |
+| 2 | `API서버` | 전달받은 키워드가 truthy한 경우, typesense 클라이언트를 이용해 검색 서버에 질의 |
+| 3 | `검색서버` | 질의 결과를 API 서버로 응답 |
+| 4 | `API서버` | 검색서버로부터 전달받은 응답을 highlight된 snippet만 내려주도록 가공하여 응답 처리 |
+| 5 | `웹페이지` | 웹 페이지에서 발생시킨 http 요청에 대한 응답을 vue.js를 이용하여 화면에 표현 |
 
 <br/>
 
