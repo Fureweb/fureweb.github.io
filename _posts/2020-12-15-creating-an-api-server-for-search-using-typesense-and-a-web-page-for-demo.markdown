@@ -138,7 +138,7 @@ const searchResult = await client.collections(collectionName).documents().search
 console.log(searchResult)
 ```
 
-검색 서버 <-> API 서버는 HTTP 프로토콜만으로 통신하도록 해 두면 별도의 TLS 인증서를 설치하지 않아도 됩니다.
+검색 서버 <-> API 서버는 HTTP 프로토콜만으로 통신하도록 해 두면 검색 서버에는 별도의 TLS 인증서를 설치하지 않아도 됩니다.
 
 저는 검색서버의 80번 포트를 열었고, 80번 포트로 요청이 들어오면 nginx의 proxy_pass를 통해 typesense의 기본 포트인 8108쪽으로 요청과 응답이 처리되도록 설정 해 두었습니다.
 
@@ -213,7 +213,7 @@ fastify.get('/search/address', async function (request, reply) {
   // 검색 서버로 질의 및 응답용 결과 가공
   const searchParameters = { q: keyword, query_by: 'id', per_page: 10 }
   const searchResults = await typesenseClient.collections('address').documents().search(searchParameters)
-  const result = searchResults.hits.map((res) => (res.highlights[0] || []).snippet || res.document.id)
+  const result = searchResults.hits.map((res) => (res.highlights[0] || {}).snippet || res.document.id)
   return reply.send(result)
 })
 
