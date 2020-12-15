@@ -47,8 +47,8 @@ categories: blog
 ### 데모용 웹 페이지
 
 이 게시글을 작성하기 전에 [데모용 웹페이지](https://api.fureweb.com/typesense.html)를 하나 만들어 두었습니다. 해당 페이지는 전국 행정동 정보를 담은 [구글 스프레드시트 문서](https://docs.google.com/spreadsheets/d/1aXq4ISWG-ionVc8b0SPgASxJi7WdbQ8oz2pJ56zooCY)에 담긴 정보를 Typesense 검색엔진을 이용하여 빠른 검색 결과를 확인할 수 있도록 했습니다. Oracle의 무료 계층 인스턴스로도 충분히 빠른 검색 결과를 얻는 모습을 확인하실 수 있습니다. 다만 아웃바운드 트래픽을 마냥 낭비할 수는 없어, 최대 응답 갯수는 10개로 두었으나 무자비하도록 빠른 검색 요청-응답을 개발자도구 네트워크탭에서 확인하실 수 있도록 debounce를 적용하지 않았고, nginx의 burst 제한도 풀어 두었습니다. 그럴리는 없겠지만, 이후 과도한 트래픽이 유입된다면 클라이언트에는 debounce, 웹서버에는 burst 제한을 걸고 내려주는 응답의 갯수를 10개에서 n배 이상으로 늘리는 형태로 변경 될 수도 있습니다.
-- 데모용 웹페이지: https://api.fureweb.com/typesense.html
-- 구글 스프레드시트 문서: https://docs.google.com/spreadsheets/d/1aXq4ISWG-ionVc8b0SPgASxJi7WdbQ8oz2pJ56zooCY
+- 데모용 웹페이지: [https://api.fureweb.com/typesense.html](https://api.fureweb.com/typesense.html)
+- 구글 스프레드시트 문서: [https://docs.google.com/spreadsheets/d/1aXq4ISWG-ionVc8b0SPgASxJi7WdbQ8oz2pJ56zooCY](https://docs.google.com/spreadsheets/d/1aXq4ISWG-ionVc8b0SPgASxJi7WdbQ8oz2pJ56zooCY)
 
 위에서 언급한 데모용 웹페이지에서 사용된 `API 서버`와 `검색 서버`를 구축하기 위해 사용된 기술들을 정리 해 보고, 직접 구축하는 방법을 알아보겠습니다.
 
@@ -76,7 +76,7 @@ categories: blog
 
 |순서|처리주체|내용|
 |:--|:--|:--|
-| 1 | `웹페이지` | 웹 페이지의 input창에 focus된 상태에서 키보드가 keyup 될 때 마다 axios를 이용하여 검색 API 호출<br/>(debounce 없이, trim된 키워드가 truthy 하다면 API 서버에 검색 요청)<br/>[참고용 소스코드](view-source:https://api.fureweb.com/typesense.html) |
+| 1 | `웹페이지` | 웹 페이지의 input창에 focus된 상태에서 키보드가 keyup 될 때 마다 axios를 이용하여 검색 API 호출<br/>(debounce 없이, trim된 키워드가 truthy 하다면 API 서버에 검색 요청)|
 | 2 | `API서버` | 전달받은 키워드가 truthy한 경우, typesense 클라이언트를 이용해 검색 서버에 질의 |
 | 3 | `검색서버` | 질의 결과를 API 서버로 응답 |
 | 4 | `API서버` | 검색서버로부터 전달받은 응답을 highlight된 snippet만 내려주도록 가공하여 응답 처리 |
