@@ -75,7 +75,7 @@ export default {
 
 먼저, [구글 시트 문서](https://goree.kr/jA9VAA)를 다음과 같은 형태로 준비합니다.
 
-|ko|en|ja|key|key1|key2|key3|key4|...|key10|
+|ko|en|ja|key|key1|key2|...|key10|
 |-|-|-|-|-|-|-|-|-|-|
 |제목|title|タイトル|**수식**|common|title|
 |내용|Contents|内容|**수식**|common|description|
@@ -196,7 +196,7 @@ export default (context) => {
 <template>
   <div>
     <!-- key가 common.title인 국제화 텍스트가 알맞게 표현됩니다. -->
-    <h1>{{ $t('common.title') }}</h1>
+    <h1 :text="$t('common.title')" />
   </div>
 </template>
 ```
