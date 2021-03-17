@@ -37,6 +37,8 @@ categories: blog
 국제화 처리를 위한 파일을 직접 작성 없이 구글 시트에 입력된 내용을 기반으로 파일을 생성하고,
 나아가 파일이 없어도 국제화 처리를 할 수 있도록 예시를 들어 설명합니다.
 
+[샘플 웹 페이지](https://fureweb-com.github.io/nuxt-i18n-automation-example/)
+
 [소스코드 저장소로 이동](https://github.com/fureweb-com/nuxt-i18n-automation-example)
 
 ### 들어가며
