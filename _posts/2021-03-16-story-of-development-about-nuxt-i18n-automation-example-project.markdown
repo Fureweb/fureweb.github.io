@@ -37,9 +37,9 @@ categories: blog
 국제화 처리를 위한 파일을 직접 작성 없이 구글 시트에 입력된 내용을 기반으로 파일을 생성하고,
 나아가 파일이 없어도 국제화 처리를 할 수 있도록 예시를 들어 설명합니다.
 
-[샘플 웹 페이지](https://fureweb-com.github.io/nuxt-i18n-automation-example/)
+[샘플 웹 페이지](https://goree.kr/kw0auA)
 
-[소스코드 저장소로 이동](https://github.com/fureweb-com/nuxt-i18n-automation-example)
+[소스코드 저장소로 이동](https://goree.kr/XpCFNQ)
 
 ### 들어가며
 
@@ -73,7 +73,7 @@ export default {
 
 ### 설계 과정
 
-먼저, [구글 시트 문서](https://docs.google.com/spreadsheets/d/1TZu5G5VxPRoXeCjY7-OQbHFp09y73wGTiDsyzk6UwPQ/edit#gid=0)를 다음과 같은 형태로 준비합니다.
+먼저, [구글 시트 문서](https://goree.kr/jA9VAA)를 다음과 같은 형태로 준비합니다.
 
 |ko|en|ja|key|key1|key2|key3|key4|...|key10|
 |-|-|-|-|-|-|-|-|-|-|
@@ -82,7 +82,7 @@ export default {
 |버튼|button|ボタン|**수식**|common|button|
 |문서 경로|Documents path|ドキュメントパス|**수식**|common|sheetsPath|
 
-* [참고용 샘플 문서 링크](https://docs.google.com/spreadsheets/d/1TZu5G5VxPRoXeCjY7-OQbHFp09y73wGTiDsyzk6UwPQ/edit#gid=0)
+* [참고용 샘플 문서 링크](https://goree.kr/jA9VAA)
 
 * 위 문서는 ko 필드에만 한글 텍스트를 넣었고, en, ja 필드 값은 전부 [GOOGLETRANSLATE 함수](https://support.google.com/docs/answer/3093331?hl=ko)를 통해 구글이 번역해준 결과를 사용하도록 해 두었습니다. 실제 번역된 텍스트가 나오기 전 까지 임시로 사용할 수 있을 것이며, 이 부분은 최종적으로 검수를 마친 텍스트로 대체되어야 할 것입니다.
 
@@ -282,7 +282,7 @@ json파일을 신경쓰지 않고, 공개 권한을 가진 스프레드시트만
 
 운영 환경에서는 동적으로 가져오지 않고, 등록된 fallback.json 파일만 사용하겠다면 그런 방식으로 설정해서 사용할 수도 있습니다.
 
-이 내용을 간단히 정리하여 [공개 저장소](https://github.com/fureweb-com/nuxt-i18n-automation-example)에 등록 해 두었습니다.
+이 내용을 간단히 정리하여 [공개 저장소](https://goree.kr/XpCFNQ)에 등록 해 두었습니다.
 
 읽어주신 분들에게 조금이라도 도움이 되는 내용이었으면 합니다.
 
